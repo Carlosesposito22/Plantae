@@ -1,0 +1,218 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <header>
+        <style>
+            .back-button {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                font-size: 1.2em;
+                color: #333;
+                padding: 10px 20px;
+                background-color: #0000;
+                color: white;
+                border-radius: 5px;
+                margin-top: 20px;
+                width: fit-content;
+            }
+    
+            .back-button:hover {
+                background-color: #0000;
+            }
+    
+            .back-button img {
+                width: 20px;
+                margin-right: 10px;
+            }
+        </style>
+            <a href="javascript:history.back()" class="back-button">
+                <img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="Voltar">
+                Voltar
+            </a>
+        <title>Sobre a Equipe - BookHeaded</title>
+    </header>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin: 5px 0 20px;
+            font-size: 1.2em;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .team-member {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .team-member img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .team-member h2 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #333;
+        }
+
+        .team-member h3 {
+            color: #2f52a4;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .team-member p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        .mission, .values {
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .mission h2, .values h2 {
+            color: #2f52a4;
+            margin-bottom: 15px;
+        }
+
+        .mission p, .values ul {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .values ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .values ul li {
+            padding: 10px 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sobre a Equipe</h1>
+        <p>Conheça a equipe por trás do <strong>BookHeaded</strong>!</p>
+    </header>
+
+    <section class="team">
+        <div class="team-member">
+            <img src="{% static 'images/amanda.jpg' %}" alt="Foto de Amanda Montarroios" class="profile-pic">
+            <h2>Amanda Montarroios</h2>
+            <h3>Fundadora e Desenvolvedora Full Stack</h3>
+            <p>Amanda é uma das fundadoras do <strong>BookHeaded</strong>. Ela foca no desenvolvimento front-end, criando interfaces modernas e responsivas. Além disso, Amanda supervisiona a usabilidade geral do site, garantindo que os usuários tenham uma experiência agradável.</p>
+        </div>
+
+        <div class="team-member">
+            <img src="{% static 'images/carlos.jpg' %}" alt="Foto de Carlos Espósito" class="profile-pic">
+            <h2>Carlos Espósito</h2>
+            <h3>Fundador e Desenvolvedor Back-End</h3>
+            <p>Carlos é o responsável por criar a estrutura que dá suporte ao <strong>BookHeaded</strong>. Sua contribuição se concentra no back-end, integrando bancos de dados e garantindo que a plataforma seja escalável e eficiente.</p>
+        </div>
+
+        <div class="team-member">
+            <img src="{% static 'images/micucci.jpg' %}" alt="Foto de João Henrique Micucci" class="profile-pic">
+            <h2>João Henrique Micucci</h2>
+            <h3>Fundador e Desenvolvedor Back-End</h3>
+            <p>João Henrique traz suas habilidades de desenvolvimento back-end para otimizar o desempenho do <strong>BookHeaded</strong>. Ele é especialista em Django e sempre inova o site.</p>
+        </div>
+
+        <div class="team-member">
+            <img src="{% static 'images/mamede.jpg' %}" alt="Foto de João Pedro Mamede" class="profile-pic">
+            <h2>João Pedro Mamede</h2>
+            <h3>Fundador e Desenvolvedor Front-End</h3>
+            <p>João Pedro é o responsável por traduzir as ideias criativas em interfaces funcionais e elegantes. Ele trabalha com design UX/UI, garantindo que a interação com a plataforma seja intuitiva e atraente.</p>
+        </div>
+
+        <div class="team-member">
+            <img src="{% static 'images/malu.jpg' %}" alt="Foto de Maria Luíza Dantas" class="profile-pic">
+            <h2>Maria Luíza Dantas</h2>
+            <h3>Fundadora e Desenvolvedora Full Stack</h3>
+            <p>Maria Luíza é uma das fundadoras do <strong>BookHeaded</strong>. Com experiência em todas as fases do desenvolvimento, ela trabalha tanto no front-end quanto no back-end, integrando novas funcionalidades e colaborando no design da interface.</p>
+        </div>
+
+        <div class="team-member">
+            <img src="{% static 'images/mateus.jpg' %}" alt="Foto de Mateus Ribeiro" class="profile-pic">
+            <h2>Mateus Ribeiro</h2>
+            <h3>Fundador e Desenvolvedor Full Stack</h3>
+            <p>Mateus contribui com seu conhecimento em desenvolvimento full stack, trabalhando para garantir a integração entre o front-end e o back-end. Sua atenção aos detalhes ajuda a otimizar a performance do <strong>BookHeaded</strong>.</p>
+        </div>
+    </section>
+
+    <section class="mission">
+        <h2>Nossa Missão</h2>
+        <p>O <strong>BookHeaded</strong> nasceu com o propósito de inspirar conexões verdadeiras entre pessoas que compartilham a paixão pela leitura. Acreditamos que os livros têm o poder de unir pessoas e criar novas ideias. Estamos criando uma plataforma vibrante e engajada.</p>
+    </section>
+
+    <section class="values">
+        <h2>Nossos Valores</h2>
+        <ul>
+            <li><strong>Comunidade:</strong> Fomentamos um ambiente inclusivo e acolhedor para todos os leitores.</li>
+            <li><strong>Inovação:</strong> Buscamos sempre novas maneiras de melhorar a experiência dos nossos usuários.</li>
+            <li><strong>Paixão pela Leitura:</strong> Livros são a nossa paixão, e isso se reflete em tudo o que fazemos.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 BookHeaded. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <main>
+
+       
+
+        <section id="title-section"> <!-- Section da div do texto principal da página -->
+            <div class="title-div">
+                <p>
+                    Bookheaded
+                </p>
+            </div>
+            <button class="startnow-btn">Start Now</button> <!-- Botão de Start Now -->
+        </section>
+
+        <section id="info-section"> <!-- Section dos cards e afins -->
+
+            <div class="hold-the-cards-div"> <!-- Div para segurar a posição dos cards -->
+
+                <div class="info-card">
+                    <div class="card-div">
+                        <div class="card-icons-holder" id="star-holder">
+                            <img src="{% static 'images/conectar.jpg' %}" class="card-icons" id="star-icon">
+                        </div>
+                        <p class="card-text">Onde você cria conexões<br> por meio da leitura.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-div">
+                        <div class="card-icons-holder" id="check-holder">
+                            <img src="{% static 'images/livro.jpg' %}" class="card-icons" id="check-icon">
+                        </div>
+                        <p class="card-text">Projeto que formenta ainda mais o amor no ato de ler.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-div">
+                        <div class="card-icons-holder" id="book-holder">
+                            <img src="{% static 'images/clube.jpg' %}" class="card-icons" id="book-icon">
+                        </div>
+                        <p class="card-text">Com possibilidades de criar amizades para o resto da vida.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <section class="hold-mnbh-div"> <!-- Section para segurar a div do MNBH -->
+
+                <div class="mnbh-div">
+
+                    <button class="startnow-btn" id="mnbh-btn">Meet New Bookheads</button>
+
+                </div>
+
+            </section>
+
+
+        </section>
+
+    </main>
+    <style>
+@media (max-width: 600px) {
+    .startnow-btn {
+        width: 100%; /* Botão ocupa 100% em telas pequenas */
+    }
+}
+    </style>
+
+</body>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% load static %}
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <script src="{% static 'assets/js/color-modes.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"rel="stylesheet">
+  <link rel="icon" href="images\bookheaded-onlytheboy-white.svg">
+  <title>bookheaded</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>Header</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+  <link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <link href="{% static 'base-style.css' %}" rel="stylesheet">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  {% include 'navbar.html' %}
+    {% if messages %}
+      {% for message in messages %}
+  
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+      {% endfor %}
+
+
+    {% endif %}
+
+  {% block content %}
+  {% endblock %}
+
+    
+
+
+
+  
+
+</main>
+  <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>
