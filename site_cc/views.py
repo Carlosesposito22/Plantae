@@ -1,3 +1,5 @@
+# views.py
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -6,12 +8,54 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, JsonResponse
-from django.db.models import Q
 import requests
 from datetime import datetime, timedelta
 
 def pagina_principal(request):
-    return render(request, 'pagina_principal.html', {})
+    # Dados das plantas com suas interações
+    plantas = {
+        'Tomate': {
+            'se_da_bem': ['Cenoura', 'Alface'],
+            'nao_se_da_bem': ['Batata'],
+            'indiferente': ['Rúcula'],
+        },
+        'Cenoura': {
+            'se_da_bem': ['Alface', 'Rúcula'],
+            'nao_se_da_bem': ['Batata'],
+            'indiferente': ['Tomate'],
+        },
+        'Alface': {
+            'se_da_bem': ['Cenoura', 'Rúcula'],
+            'nao_se_da_bem': ['Batata'],
+            'indiferente': ['Tomate'],
+        },
+        'Batata': {
+            'se_da_bem': ['Rúcula'],
+            'nao_se_da_bem': ['Tomate', 'Cenoura'],
+            'indiferente': ['Alface'],
+        },
+        'Rúcula': {
+            'se_da_bem': ['Cenoura', 'Alface'],
+            'nao_se_da_bem': ['Batata'],
+            'indiferente': ['Tomate'],
+        },
+    }
+
+    resultado = None
+    planta = request.GET.get('planta')  # Obtenha o valor da planta do formulário
+
+    if planta:
+        planta = planta.capitalize()  # Capitalize para garantir que a pesquisa funcione
+        if planta in plantas:
+            resultado = plantas[planta]  # Encontre o resultado correspondente
+
+    contexto = {
+        'plantas': plantas,
+        'planta': planta,
+        'resultado': resultado,
+    }
+
+    return render(request, 'pagina_principal.html', contexto)
 
 def introducao(request):
     return render(request, 'introducao.html')
@@ -21,6 +65,9 @@ def equipe(request):
 
 def contato(request):
     return render(request, 'contato.html')
+
+def calendario(request):
+    return render(request, 'calendario.html')
 
 def tempo(request):
     API_KEY = "ae959f54e6804eb49fd210633242409"
@@ -66,7 +113,6 @@ def tempo(request):
         }
     
     return render(request, 'tempo.html', contexto)
-
 
 class HomePageView(ListView):
     template_name = 'pagina_principal.html'
