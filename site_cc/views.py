@@ -2,57 +2,86 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import ListView
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
 import requests
-from datetime import datetime, timedelta
+import google.generativeai as genai
+from django.shortcuts import render
+
+# Configure sua API da Google Generative AI
+API_KEY = 'AIzaSyC4AVfey0X8ONDz9f_vdw6Sq9yDdhHFowk'
+genai.configure(api_key=API_KEY)
+
+# Dicionário de plantas e suas compatibilidades
+plantas = {
+    'Tomate': {
+        'se_da_bem': ['Cenoura', 'Alface'],
+        'nao_se_da_bem': ['Batata'],
+        'indiferente': ['Rúcula'],
+    },
+    'Cenoura': {
+        'se_da_bem': ['Alface', 'Rúcula'],
+        'nao_se_da_bem': ['Batata'],
+        'indiferente': ['Tomate'],
+    },
+    'Alface': {
+        'se_da_bem': ['Cenoura', 'Rúcula'],
+        'nao_se_da_bem': ['Batata'],
+        'indiferente': ['Tomate'],
+    },
+    'Batata': {
+        'se_da_bem': ['Rúcula'],
+        'nao_se_da_bem': ['Tomate', 'Cenoura'],
+        'indiferente': ['Alface'],
+    },
+    'Rúcula': {
+        'se_da_bem': ['Cenoura', 'Alface'],
+        'nao_se_da_bem': ['Batata'],
+        'indiferente': ['Tomate'],
+    },
+}
 
 def pagina_principal(request):
-    plantas = {
-        'Tomate': {
-            'se_da_bem': ['Cenoura', 'Alface'],
-            'nao_se_da_bem': ['Batata'],
-            'indiferente': ['Rúcula'],
-        },
-        'Cenoura': {
-            'se_da_bem': ['Alface', 'Rúcula'],
-            'nao_se_da_bem': ['Batata'],
-            'indiferente': ['Tomate'],
-        },
-        'Alface': {
-            'se_da_bem': ['Cenoura', 'Rúcula'],
-            'nao_se_da_bem': ['Batata'],
-            'indiferente': ['Tomate'],
-        },
-        'Batata': {
-            'se_da_bem': ['Rúcula'],
-            'nao_se_da_bem': ['Tomate', 'Cenoura'],
-            'indiferente': ['Alface'],
-        },
-        'Rúcula': {
-            'se_da_bem': ['Cenoura', 'Alface'],
-            'nao_se_da_bem': ['Batata'],
-            'indiferente': ['Tomate'],
-        },
-    }
-
     resultado = None
+    texto_gerado = None
     planta = request.GET.get('planta')
+
+    print(f"Planta selecionada: {planta}")
 
     if planta:
         planta = planta.capitalize()
         if planta in plantas:
             resultado = plantas[planta]
 
+            prompt_fixo = """
+            Você só pode falar sobre agronomia, sustentabilidade, práticas agrícolas, tipos de solo e plantio. 
+            Não quero que fuja para temas paralelos, como sugestões de vídeos ou coisas do tipo. Quero que tudo que for sugerir ou responder envolva apenas texto.
+            Se a pergunta não tiver nada sobre agricultura ou algo relacionado, responda com: 
+            'Não posso responder sobre esse tema, fui treinado apenas para práticas agrícolas.'
+            """
+
+            prompt_geracao = f"Escreva um texto de 2 linhas onde fala sobre {planta}, incluindo informações sobre sua compatibilidade com estas plantas, explicando o motivo da compatibilidade {plantas}"
+
+            try:
+                model = genai.GenerativeModel('gemini-pro')
+                response = model.generate_content(prompt_geracao)
+                texto_gerado = response.text.strip()
+
+                if 'Não posso responder' in texto_gerado:
+                    texto_gerado = "Nenhuma informação válida gerada sobre a planta."
+            except Exception as e:
+                print(f"Erro ao gerar texto: {e}")
+
     contexto = {
-        'plantas': plantas,
+        'plantas': plantas.keys(),
         'planta': planta,
         'resultado': resultado,
+        'texto_gerado': texto_gerado if texto_gerado else "Nenhum texto gerado pela IA.",
     }
 
     return render(request, 'pagina_principal.html', contexto)
+
+
+
 
 def introducao(request):
     return render(request, 'introducao.html')
@@ -86,17 +115,14 @@ def tempo(request):
             }
 
             for item in requisicao_forecast_dic['forecast']['forecastday']:
-                data_formatada = item['date']
-                dia = item['day']
-
                 previsao.append({
-                    'data': data_formatada,
-                    'descricao': dia['condition']['text'],
-                    'temperatura_max': dia['maxtemp_c'],
-                    'temperatura_min': dia['mintemp_c'],
-                    'umidade': dia['avghumidity'],
-                    'precipitacao': dia['totalprecip_mm'],
-                    'vento_velocidade': dia['maxwind_kph'],
+                    'data': item['date'],
+                    'descricao': item['day']['condition']['text'],
+                    'temperatura_max': item['day']['maxtemp_c'],
+                    'temperatura_min': item['day']['mintemp_c'],
+                    'umidade': item['day']['avghumidity'],
+                    'precipitacao': item['day']['totalprecip_mm'],
+                    'vento_velocidade': item['day']['maxwind_kph'],
                 })
 
             contexto = {
