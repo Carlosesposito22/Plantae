@@ -1,8 +1,6 @@
-# views.py
-
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -12,7 +10,6 @@ import requests
 from datetime import datetime, timedelta
 
 def pagina_principal(request):
-    # Dados das plantas com suas interações
     plantas = {
         'Tomate': {
             'se_da_bem': ['Cenoura', 'Alface'],
@@ -42,12 +39,12 @@ def pagina_principal(request):
     }
 
     resultado = None
-    planta = request.GET.get('planta')  # Obtenha o valor da planta do formulário
+    planta = request.GET.get('planta')
 
     if planta:
-        planta = planta.capitalize()  # Capitalize para garantir que a pesquisa funcione
+        planta = planta.capitalize()
         if planta in plantas:
-            resultado = plantas[planta]  # Encontre o resultado correspondente
+            resultado = plantas[planta]
 
     contexto = {
         'plantas': plantas,

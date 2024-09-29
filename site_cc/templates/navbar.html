@@ -1,13 +1,8 @@
-<style>
+{% load static %}
 
-    *{
-      font-family: 'DM Sans', 'sans-serif';
-    }
-
-    .newclub-btn{
-      padding-top: .3rem;
-    }
-</style>
+<head>
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
 
 <header class="p-3 text-bg-light shadow-lg">
   <div class="container">
@@ -15,21 +10,19 @@
       <ul class="nav nav-underline col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li class="nav-item"><a href="{% url 'pagina_principal' %}" class="nav-link px-2 text-black">Plantio</a></li>
         <li class="nav-item"><a href="{% url 'tempo' %}" class="nav-link px-2 text-black">Tempo</a></li>
-        <li class="nav-item"><a href="{% url 'calendario' %}" class="nav-link px-2 text-black">Calendario</a></li>
-        
+        <li class="nav-item"><a href="{% url 'calendario' %}" class="nav-link px-2 text-black">Calendário</a></li>
       </ul>
 
       <div class="text-end">
         {% if user.is_authenticated %}
         <form method="post" action="{% url 'logout' %}" style="display:inline;">
           {% csrf_token %}
-         
-          <button class="btn btn-light" type="submit">Logout</button>
+          <button class="btn btn-light" type="submit">Sair</button>
         </form>
         <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png" alt="foto de usuário" width="60px">
         {% else %}
-        <a class="btn btn-light" href=" {% url 'register' %}">Register</a>
-        <a class="btn btn-light" href="{% url 'login' %}">Login</a>
+        <a class="btn btn-light" href=" {% url 'register' %}">Registro</a>
+        <a class="btn btn-light" href="{% url 'login' %}">Entrar</a>
         {% endif %}
       </div>
     </div>

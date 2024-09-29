@@ -1,117 +1,14 @@
 {% extends 'base2.html' %}
-{% block content %}
 {% load static %}
 
-<style>
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: white;
-  }
+{% block content %}
 
-  .centered-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 1rem;
-    box-sizing: border-box;
-    z-index: 1;
-  }
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
 
-  .row {
-    background: rgb(247, 247, 247);
-    width: fit-content;
-    max-width: 100%;
-    max-height: auto;
-    margin: 0;
-    border-style: solid;
-    border-color: grey;
-    border-width: .1rem;
-    border-radius: 1rem;
-    padding: 3rem;
-    padding-bottom: 2rem;
-  }
-
-  .login-items-holder {
-    height: fit-content;
-    width: fit-content;
-    max-width: fit-content;
-    max-height: fit-content;
-  }
-
-  .user-passwd {
-    height: 3rem;
-  }
-
-  .login-btn {
-    height: 100%;
-    width: 100%;
-    min-height: 100%;
-    min-width: 100%;
-    border-radius: 1rem;
-    font-size: 1rem;
-    font-weight: bold;
-    font-family: 'DM Sans', 'sans-serif';
-    color: white;
-    background-color: #0066FF;
-    cursor: pointer;
-  }
-
-  .login-btn:disabled {
-    background-color: grey;
-    cursor: not-allowed;
-  }
-
-  p,
-  .user-passwd {
-    font-family: 'DM Sans', 'sans-serif';
-  }
-
-  .not-registered {
-    margin-top: 2rem;
-    color: black;
-  }
-
-  .logo-image{
-    padding: 2rem;
-    display: flex;
-    z-index: 999;
-    max-width: 30rem;
-    max-height: auto;
-    width: 15rem;
-    height: auto;
-    position: absolute;
-  }
-
-  .login-drawing{
-    position: relative;
-    display: flex;
-    margin-left: 2rem;
-  }
-
-  .vertical-line{
-        display: inline-block;
-        border-left: 1px solid #ccc;
-        margin: 0 10px;
-        height: 20rem;
-        position: absolute;
-        z-index: 1000;
-        margin-left: 5rem;
-  }
-
-  @media screen and (max-width: 920px) {
-    .login-drawing, .vertical-line{
-      display: none;
-    }
-  }
-</style>
-
-<a href="http://localhost:8000/">
-  <img src="{% static 'images/bookheadedlogo.svg' %}" class="logo-image">
+<P><strong>Imagem que serve apenas para voltar</strong></P>
+<a href="{% url 'pagina_principal' %}">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1haV3q_c4ipo7LJDCGLUHFpvahVYTABVbjQ&s" width="50px"
+    height="50px">
 </a>
 
 <div class="container-fluid centered-container">
@@ -120,22 +17,20 @@
       <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
         <div class="mb-3">
-          <p class="text-start text-black display-5 fw-bold login-text">Welcome back</p>
-          <p class="text-start text-black fw-light user-text">Get into the perfect place for bookheads just like you.
-          </p>
-          <input type="text" class="form-control p-3 user-passwd" id="username" name="username" placeholder="username">
+          <p class="text-start text-black display-5 fw-bold login-text">Bem vindo ao plantaê!</p>
+          <input type="text" class="form-control p-3 user-passwd" id="username" name="username" placeholder="Usuário">
         </div>
         <div class="mb-3">
-          <input type="password" class="form-control p-3 user-passwd" id="password" name="password" placeholder="password">
+          <input type="password" class="form-control p-3 user-passwd" id="password" name="password" placeholder="Senha">
         </div>
-        <button type="submit" class="btn btn-primary login-btn" id="loginBtn" disabled>Login</button>
-        <p class="not-registered">Not registered yet? <a href="http://localhost:8000/membros/registration/"
-            class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Sign Up</a></p>
+        <button type="submit" class="btn btn-primary login-btn" id="loginBtn" disabled>Entrar</button>
+        <p class="not-registered">
+          Não é registrado? <a href="http://localhost:8000/membros/registration/"
+            class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Registro</a>
+        </p>
       </form>
     </div>
   </div>
-  <span class="vertical-line"></span>
-  <img src="{% static 'images/image login.png' %}" class="login-drawing">
 </div>
 
 <script>
