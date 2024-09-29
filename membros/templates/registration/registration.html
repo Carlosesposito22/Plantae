@@ -2,74 +2,8 @@
 {% load static %}
 
 {% block content %}
-<style>
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background: white;
-    }
 
-    .register-btn {
-        height: 100%;
-        width: fit-content;
-        min-height: 100%;
-        min-width: fit-content;
-        border-radius: 1rem;
-        font-size: 1rem;
-        font-weight: bold;
-        font-family: 'DM Sans', 'sans-serif';
-        color: white;
-        background-color: #0066FF;
-        cursor: pointer;
-    }
-
-    .register-btn:hover {
-        background-color: #004bbc;
-    }
-
-    .form-group {
-        font-family: 'DM Sans', 'sans-serif';
-    }
-
-    ul li {
-        font-size: .8rem;
-        width: fit-content;
-       
-        list-style: none;
-        color: black;
-    }
-
-    li:before {
-        content: "\2713";
-    }
-
-    label {
-        font-weight: bold;
-    }
-
-    .alr-registered {
-        margin-top: 2rem;
-        color: black;
-        font-family: 'DM Sans', 'sans-serif';
-    }
-
-    .supercontainer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh; 
-    }
-
-    .hold-title-logo {
-        display: flex;
-        flex-direction: column;
-        justify-content:left;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
 
 <div class="container d-flex min-vh-100 supercontainer">
     <div class="hold-title-logo">
@@ -94,16 +28,15 @@
                         <label for="password2" class="form-label">Confirme a Senha:</label>
                         <input type="password" id="password2" name="password2" class="form-control" required>
                     </div>
-                    <button class="btn btn-secondary register-btn" type="submit">Create Account</button>
+                    <button class="btn btn-secondary register-btn" type="submit">Criar conta</button>
                 </form>
                 <hr>
                 <p class="alr-registered">Já tem uma conta? <a href="{% url 'login' %}"
-                        class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Login</a>
+                        class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Entrar</a>
                 </p>
             </div>
         </div>
     </div>
 </div>
-
 
 {% endblock %}
