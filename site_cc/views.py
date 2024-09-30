@@ -104,9 +104,6 @@ def contato(request):
 def calendario(request):
     return render(request, 'calendario.html')
 
-from datetime import datetime
-import requests
-from django.shortcuts import render
 
 def tempo(request):
     API_KEY = "ae959f54e6804eb49fd210633242409"
