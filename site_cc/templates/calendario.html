@@ -10,14 +10,19 @@
         max-width: 400px;
     }
     th, td {
-        padding: 20px; /* Aumenta o espaço interno das células */
+        padding: 20px;
         border: 1px solid black;
         text-align: center;
-        height: 50px; /* Define uma altura fixa para as células */
-        vertical-align: middle; /* Alinha o conteúdo verticalmente no centro */
+        height: 50px;
+        vertical-align: middle;
     }
     .highlight {
         background-color: yellow;
+        border-radius: 50%;
+        padding: 10px;
+    }
+    .event {
+        background-color: lightgreen;
         border-radius: 50%;
         padding: 10px;
     }
@@ -25,13 +30,11 @@
 
 <h1>Calendário - {{ current_month }} de {{ current_year }}</h1>
 
-<!-- Botões para navegar pelos meses -->
 <div>
     <a href="{% url 'calendario' prev_year prev_month %}">Anterior</a> |
     <a href="{% url 'calendario' next_year next_month %}">Próximo</a>
 </div>
 
-<!-- Tabela do calendário -->
 <table>
     <thead>
         <tr>
@@ -50,7 +53,9 @@
                 <td></td>
             {% endfor %}
             {% for day in days %}
-                <td class="{% if day == today %}highlight{% endif %}">{{ day }}</td>
+                <td class="{% if day == today %}highlight{% endif %}{% if day in event_days %} event{% endif %}">
+                    {{ day }}
+                </td>
                 {% if forloop.counter|divisibleby:"7" %}
         </tr><tr>
                 {% endif %}
@@ -58,5 +63,54 @@
         </tr>
     </tbody>
 </table>
+
+<h2>Adicionar Evento</h2>
+<label for="event-name">Nome do Evento:</label>
+<input type="text" id="event-name" name="event-name">
+<br>
+<label for="start-date">Data de Início:</label>
+<input type="date" id="start-date" name="start-date">
+<br>
+<label for="end-date">Data de Fim:</label>
+<input type="date" id="end-date" name="end-date">
+<br>
+<button onclick="adicionarEvento()">Adicionar Evento</button>
+
+<script>
+    function adicionarEvento() {
+        var nome = document.getElementById('event-name').value;
+        var inicio = document.getElementById('start-date').value;
+        var fim = document.getElementById('end-date').value;
+
+        if (nome && inicio && fim) {
+            console.log("Dados enviados:", nome, inicio, fim);
+
+            fetch("{% url 'calendario' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    'nome': nome,
+                    'inicio': inicio,
+                    'fim': fim
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Resposta recebida:", data);
+                if (data.success) {
+                    alert('Evento adicionado com sucesso!');
+                    window.location.reload();
+                } else {
+                    alert('Erro ao adicionar evento: ' + data.message);
+                }
+            });
+        } else {
+            alert('Preencha todos os campos!');
+        }
+    }
+</script>
 
 {% endblock %}

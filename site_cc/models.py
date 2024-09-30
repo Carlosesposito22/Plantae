@@ -9,3 +9,11 @@ class Planta(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Evento(models.Model):
+    nome = models.CharField(max_length=100)
+    data_inicio = models.DateField()
+    data_fim = models.DateField()
+
+    def __str__(self):
+        return f"{self.nome} ({self.data_inicio} - {self.data_fim})"

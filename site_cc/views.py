@@ -10,12 +10,19 @@ from datetime import datetime, timedelta
 from django.shortcuts import render
 from calendar import monthrange
 import datetime
+from .models import Evento
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from .models import Evento
+import json
+import datetime
+import calendar
 
-# Configure sua API da Google Generative AI
+
 API_KEY = 'AIzaSyC4AVfey0X8ONDz9f_vdw6Sq9yDdhHFowk'
 genai.configure(api_key=API_KEY)
 
-# Dicionário de plantas e suas compatibilidades
 plantas = {
     'Tomate': {
         'se_da_bem': ['Cenoura', 'Alface'],
@@ -83,9 +90,6 @@ def pagina_principal(request):
     }
 
     return render(request, 'pagina_principal.html', contexto)
-
-
-
 
 def introducao(request):
     return render(request, 'introducao.html')
@@ -167,40 +171,64 @@ def logout_user(request):
 from calendar import monthcalendar
 
 def calendario(request, year=None, month=None):
-    # Corrigir para usar o método correto de obter a data atual
     today = datetime.date.today()
     current_year = year if year else today.year
     current_month = month if month else today.month
 
-    # Calcular o primeiro e último dia do mês
     first_day_of_month = datetime.date(current_year, current_month, 1)
-    _, last_day_of_month = monthrange(current_year, current_month)
-
-    # Calcular o dia da semana do primeiro dia (0=segunda-feira, 6=domingo)
+    _, last_day_of_month = calendar.monthrange(current_year, current_month)
     first_weekday = first_day_of_month.weekday()
-
-    # Gerar lista de dias do mês
     days = list(range(1, last_day_of_month + 1))
-
-    # Calcular os dias vazios (espaços antes do primeiro dia do mês)
     empty_days = [None] * (first_weekday + 1 if first_weekday != 6 else 0)
 
-    # Calcular mês anterior e próximo
     if current_month == 1:
-        prev_month = 12
-        prev_year = current_year - 1
+        prev_month, prev_year = 12, current_year - 1
     else:
-        prev_month = current_month - 1
-        prev_year = current_year
+        prev_month, prev_year = current_month - 1, current_year
 
     if current_month == 12:
-        next_month = 1
-        next_year = current_year + 1
+        next_month, next_year = 1, current_year + 1
     else:
-        next_month = current_month + 1
-        next_year = current_year
+        next_month, next_year = current_month + 1, current_year
 
-    # Renderizar o template
+    eventos = Evento.objects.filter(
+        data_inicio__year=current_year,
+        data_inicio__month=current_month
+    )
+
+    event_days = set()
+    for event in eventos:
+        start_day = event.data_inicio.day
+        end_day = event.data_fim.day
+
+        for day in range(start_day, end_day + 1):
+            event_days.add(day)
+
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            nome_evento = data.get('nome')
+            inicio_evento = data.get('inicio')
+            fim_evento = data.get('fim')
+
+            inicio_evento = datetime.datetime.strptime(inicio_evento, '%Y-%m-%d').date()
+            fim_evento = datetime.datetime.strptime(fim_evento, '%Y-%m-%d').date()
+
+            if inicio_evento > fim_evento:
+                return JsonResponse({'success': False, 'message': 'Data de início não pode ser posterior à data de fim.'})
+
+            Evento.objects.create(
+                nome=nome_evento,
+                data_inicio=inicio_evento,
+                data_fim=fim_evento
+            )
+
+            return JsonResponse({'success': True})
+
+        except Exception as e:
+            print(f"Erro ao processar dados: {str(e)}")
+            return JsonResponse({'success': False, 'message': 'Erro ao adicionar evento.'})
+
     context = {
         'current_year': current_year,
         'current_month': current_month,
@@ -210,7 +238,7 @@ def calendario(request, year=None, month=None):
         'prev_month': prev_month,
         'next_year': next_year,
         'next_month': next_month,
-        'today': today.day if current_month == today.month and current_year == today.year else None  # Verificar se o mês/ano é o atual
+        'today': today.day if current_month == today.month and current_year == today.year else None,
+        'event_days': list(event_days),
     }
-
     return render(request, 'calendario.html', context)
