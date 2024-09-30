@@ -104,6 +104,10 @@ def contato(request):
 def calendario(request):
     return render(request, 'calendario.html')
 
+from datetime import datetime
+import requests
+from django.shortcuts import render
+
 def tempo(request):
     API_KEY = "ae959f54e6804eb49fd210633242409"
     cidade = "Carpina"
@@ -123,6 +127,9 @@ def tempo(request):
                 'nome': requisicao_forecast_dic['location']['name'],
             }
 
+            
+            today = datetime.now().date().strftime("%Y-%m-%d")
+
             for item in requisicao_forecast_dic['forecast']['forecastday']:
                 previsao.append({
                     'data': item['date'],
@@ -136,7 +143,8 @@ def tempo(request):
 
             contexto = {
                 'cidade': cidade_info,
-                'previsao': previsao
+                'previsao': previsao,
+                'today': today  
             }
 
     except requests.exceptions.RequestException as e:
@@ -145,6 +153,7 @@ def tempo(request):
         }
     
     return render(request, 'tempo.html', contexto)
+
 
 class HomePageView(ListView):
     template_name = 'pagina_principal.html'

@@ -11,6 +11,17 @@
     {% if erro %}
         <p>Erro: {{ erro }}</p>
     {% else %}
+        <p>Data de Hoje: {{ today }}</p> 
+        {% for item in previsao %}
+            {% if item.data == today %}
+                {% if item.temperatura_max > 25 or item.temperatura_min < 20 %}
+                    <p style="color: red; font-weight: bold;">
+                        Atenção: temperatura crítica!
+                    </p>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        
         <table class="weather-table">
             <thead>
                 <tr>
