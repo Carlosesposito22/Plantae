@@ -3,6 +3,60 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/calendario.css' %}">
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 400px;
+    }
+    th, td {
+        padding: 20px; /* Aumenta o espaço interno das células */
+        border: 1px solid black;
+        text-align: center;
+        height: 50px; /* Define uma altura fixa para as células */
+        vertical-align: middle; /* Alinha o conteúdo verticalmente no centro */
+    }
+    .highlight {
+        background-color: yellow;
+        border-radius: 50%;
+        padding: 10px;
+    }
+</style>
+
+<h1>Calendário - {{ current_month }} de {{ current_year }}</h1>
+
+<!-- Botões para navegar pelos meses -->
+<div>
+    <a href="{% url 'calendario' prev_year prev_month %}">Anterior</a> |
+    <a href="{% url 'calendario' next_year next_month %}">Próximo</a>
+</div>
+
+<!-- Tabela do calendário -->
+<table>
+    <thead>
+        <tr>
+            <th>Dom</th>
+            <th>Seg</th>
+            <th>Ter</th>
+            <th>Qua</th>
+            <th>Qui</th>
+            <th>Sex</th>
+            <th>Sáb</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for day in empty_days %}
+                <td></td>
+            {% endfor %}
+            {% for day in days %}
+                <td class="{% if day == today %}highlight{% endif %}">{{ day }}</td>
+                {% if forloop.counter|divisibleby:"7" %}
+        </tr><tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
 
 {% endblock %}
