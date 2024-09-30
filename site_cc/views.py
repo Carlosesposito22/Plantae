@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import ListView
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import requests
 import google.generativeai as genai
 from django.shortcuts import render
@@ -11,13 +11,14 @@ from django.shortcuts import render
 from calendar import monthrange
 import datetime
 from .models import Evento
-from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .models import Evento
 import json
 import datetime
 import calendar
+import os
+from gtts import gTTS
 
 
 API_KEY = 'AIzaSyC4AVfey0X8ONDz9f_vdw6Sq9yDdhHFowk'
@@ -242,3 +243,18 @@ def calendario(request, year=None, month=None):
         'event_days': list(event_days),
     }
     return render(request, 'calendario.html', context)
+
+def generate_audio(request):
+    if request.method == 'POST':
+        text = request.POST.get('text', '')
+        
+        if text.strip():
+            tts = gTTS(text=text, lang='pt', slow=False)
+            audio_file = "static/audio/audio_output.mp3"
+            tts.save(audio_file)
+            
+            return JsonResponse({'audio_url': f'/{audio_file}'})
+        else:
+            return JsonResponse({'error': 'O texto está vazio!'})
+    else:
+        return JsonResponse({'error': 'Método inválido, use POST'})

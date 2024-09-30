@@ -1,0 +1,54 @@
+{% load static %}
+
+{% block content %}
+
+<h1>Texto para Voz</h1>
+
+<form id="textForm">
+    <textarea id="textInput" rows="4" cols="50" placeholder="Digite o texto aqui"></textarea>
+    <br>
+    <button type="submit">Ouvir Texto Convertido em Voz</button>
+</form>
+<audio id="audioPlayer" controls style="display:none;"></audio>
+
+<h2>Áudios Pré-gravados</h2>
+<button onclick="playPreRecorded('saudacao')">Ouvir Saudação</button>
+
+<script>
+    document.getElementById("textForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const text = document.getElementById("textInput").value; 
+        
+        fetch('/generate-audio/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: new URLSearchParams({
+                'text': text
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.audio_url) {
+                const audioPlayer = document.getElementById("audioPlayer");
+                audioPlayer.src = data.audio_url;
+                audioPlayer.style.display = "block";
+                audioPlayer.play();
+            } else {
+                alert(data.error);
+            }
+        })
+        .catch(error => console.log("Erro ao gerar áudio:", error));
+    });
+    function playPreRecorded(audioName) {
+        const audioPlayer = document.getElementById("audioPlayer");
+        audioPlayer.src = `/static/audio/pre_gravados/${audioName}.mp3`;
+        audioPlayer.style.display = "block"; 
+        audioPlayer.play(); 
+    }
+</script>
+
+{% endblock %}

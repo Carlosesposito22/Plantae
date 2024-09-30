@@ -12,4 +12,6 @@ urlpatterns = [
     path('contato/', views.contato, name='contato'),
     path('calendario/<int:year>/<int:month>/', views.calendario, name='calendario'),
     path('calendario/', views.calendario, name='calendario'),
+    path('generate-audio/', views.generate_audio, name='generate_audio'),
+
 ]
