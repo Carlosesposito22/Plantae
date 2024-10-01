@@ -1,17 +1,10 @@
+{% extends 'base1.html' %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/introducao.css' %}">
 
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/introducao.css' %}">
-    <title>Plantaê</title>
-</head>
 
-<body>
+{% include 'audio.html' %}
 
-</body>
-
-</html>
+{% endblock %}

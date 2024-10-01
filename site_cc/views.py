@@ -19,7 +19,9 @@ import datetime
 import calendar
 import os
 from gtts import gTTS
-
+from datetime import datetime
+import requests
+from django.shortcuts import render
 
 API_KEY = 'AIzaSyC4AVfey0X8ONDz9f_vdw6Sq9yDdhHFowk'
 genai.configure(api_key=API_KEY)
