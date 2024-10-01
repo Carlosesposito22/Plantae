@@ -180,11 +180,13 @@ def logout_user(request):
 from calendar import monthcalendar
 
 def calendario(request, year=None, month=None):
-    today = datetime.date.today()
+    today = datetime.today().date()
+
     current_year = year if year else today.year
     current_month = month if month else today.month
 
-    first_day_of_month = datetime.date(current_year, current_month, 1)
+    first_day_of_month = datetime(current_year, current_month, 1).date()
+
     _, last_day_of_month = calendar.monthrange(current_year, current_month)
     first_weekday = first_day_of_month.weekday()
     days = list(range(1, last_day_of_month + 1))
@@ -220,12 +222,14 @@ def calendario(request, year=None, month=None):
             inicio_evento = data.get('inicio')
             fim_evento = data.get('fim')
 
-            inicio_evento = datetime.datetime.strptime(inicio_evento, '%Y-%m-%d').date()
-            fim_evento = datetime.datetime.strptime(fim_evento, '%Y-%m-%d').date()
+            # Corrigido para utilizar o `datetime.strptime`
+            inicio_evento = datetime.strptime(inicio_evento, '%Y-%m-%d').date()
+            fim_evento = datetime.strptime(fim_evento, '%Y-%m-%d').date()
 
             if inicio_evento > fim_evento:
                 return JsonResponse({'success': False, 'message': 'Data de início não pode ser posterior à data de fim.'})
 
+            # Criação do evento
             Evento.objects.create(
                 nome=nome_evento,
                 data_inicio=inicio_evento,
@@ -236,7 +240,7 @@ def calendario(request, year=None, month=None):
 
         except Exception as e:
             print(f"Erro ao processar dados: {str(e)}")
-            return JsonResponse({'success': False, 'message': 'Erro ao adicionar evento.'})
+            return JsonResponse({'success': False, 'message': f'Erro ao adicionar evento: {str(e)}'})
 
     context = {
         'current_year': current_year,
