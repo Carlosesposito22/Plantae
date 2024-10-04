@@ -118,7 +118,7 @@ def tempo(request):
         requisicao_forecast.raise_for_status()
         requisicao_forecast_dic = requisicao_forecast.json()
 
-        if "forecast" not in requisicao_forecast_dic:
+        if "forecast" not in requisicao_forecast_dic or "current" not in requisicao_forecast_dic:
             contexto = {'erro': 'Não foi possível obter a previsão do tempo.'}
         else:
             previsao = []
@@ -127,6 +127,7 @@ def tempo(request):
             }
 
             today = datetime.now().date().strftime("%Y-%m-%d")
+            temperatura_atual = requisicao_forecast_dic['current']['temp_c'] 
 
             for item in requisicao_forecast_dic['forecast']['forecastday']:
 
@@ -151,7 +152,8 @@ def tempo(request):
             contexto = {
                 'cidade': cidade_info,
                 'previsao': previsao,
-                'today': today  
+                'today': today,
+                'temperatura_atual': temperatura_atual  
             }
 
     except requests.exceptions.RequestException as e:

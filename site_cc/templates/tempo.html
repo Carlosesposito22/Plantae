@@ -3,6 +3,18 @@
 
 {% block content %}
 
+<style>
+    .caixa-temperatura {
+        position: absolute;
+        top: 135px;
+        right: 180px;
+        border: 2px solid;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }    
+</style>
+
 <link rel="stylesheet" href="{% static 'css/tempo.css' %}">
 
 <div class="weather-table-container">
@@ -11,17 +23,23 @@
     {% if erro %}
         <p>Erro: {{ erro }}</p>
     {% else %}
-        <p>Data de Hoje: {{ today }}</p> 
-        {% for dia in previsao %}
-            <div class="previsao-dia {% if dia.is_critical %}clima-critico{% endif %}">
-                <h3>{{ dia.data }}</h3>
-                <p>{{ dia.descricao }}</p>
-                <p>Temperatura: Máx {{ dia.temperatura_max }}°C, Mín {{ dia.temperatura_min }}°C</p>
-                <p>Vento: {{ dia.vento_velocidade }} km/h</p>
-                <p>Precipitação: {{ dia.precipitacao }} mm</p>
-            </div>
+        <div class="caixa-temperatura">
+            <p>Temperatura Atual:</p>
+            <strong>{{ temperatura_atual }}°C</strong>
+        </div>
+
+        <p>Data de Hoje: {{ today }}</p>
+
+        {% for item in previsao %}
+            {% if item.data == today %}
+                {% if temperatura_atual > 25 or temperatura_atual < 20 %}
+                    <p style="color: red; font-weight: bold;">
+                        Atenção: Temperatura fora do ideal (20-25ºC)
+                    </p>
+                {% endif %}
+            {% endif %}
         {% endfor %}
-        
+
         <table class="weather-table">
             <thead>
                 <tr>
