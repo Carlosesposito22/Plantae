@@ -44,6 +44,12 @@
     padding: 20px;
 }
 
+.clima-critico {
+    color: red;
+    font-weight: bold;
+}
+
+
 @media (max-width: 768px) {
 
     .weather-table th,

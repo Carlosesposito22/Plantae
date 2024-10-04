@@ -126,10 +126,17 @@ def tempo(request):
                 'nome': requisicao_forecast_dic['location']['name'],
             }
 
-            
             today = datetime.now().date().strftime("%Y-%m-%d")
 
             for item in requisicao_forecast_dic['forecast']['forecastday']:
+
+                is_critical = (
+                    item['day']['maxtemp_c'] > 35 or
+                    item['day']['mintemp_c'] < 5 or
+                    item['day']['maxwind_kph'] > 50 or
+                    item['day']['totalprecip_mm'] > 50 
+                )
+                
                 previsao.append({
                     'data': item['date'],
                     'descricao': item['day']['condition']['text'],
@@ -138,6 +145,7 @@ def tempo(request):
                     'umidade': item['day']['avghumidity'],
                     'precipitacao': item['day']['totalprecip_mm'],
                     'vento_velocidade': item['day']['maxwind_kph'],
+                    'is_critical': is_critical
                 })
 
             contexto = {
@@ -152,6 +160,7 @@ def tempo(request):
         }
     
     return render(request, 'tempo.html', contexto)
+
 
 
 class HomePageView(ListView):
@@ -222,14 +231,12 @@ def calendario(request, year=None, month=None):
             inicio_evento = data.get('inicio')
             fim_evento = data.get('fim')
 
-            # Corrigido para utilizar o `datetime.strptime`
             inicio_evento = datetime.strptime(inicio_evento, '%Y-%m-%d').date()
             fim_evento = datetime.strptime(fim_evento, '%Y-%m-%d').date()
 
             if inicio_evento > fim_evento:
                 return JsonResponse({'success': False, 'message': 'Data de início não pode ser posterior à data de fim.'})
 
-            # Criação do evento
             Evento.objects.create(
                 nome=nome_evento,
                 data_inicio=inicio_evento,
