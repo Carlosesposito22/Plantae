@@ -6,15 +6,16 @@ Bem-vindo ao repositório do nosso projeto Plantaê. Nossa plataforma está send
 
 - **Linguagem de Programação**:<br>![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-- **Banco de Dados**:<br>![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+- **Banco de Dados**:<br>![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
 - **Framework de Desenvolvimento**:<br>![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
 
 - **Frontend**:<br>![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+  
+- **Testes Automatizados**:<br>![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white) 
 
-## 🌐 Link para o site
-<li> <a href="https://sites.google.com/d/1JXK5ta2sqep8pjpk_3bkcOIRbX0YvDPX/p/1qiB0RkR-gudio6mNbYCOyr53QmjL94f_/edit">Link do Site</a> </li>
-<br>
+## 🌐 Link para o Google Sites
+<li> <a href="https://sites.google.com/d/1JXK5ta2sqep8pjpk_3bkcOIRbX0YvDPX/p/1qiB0RkR-gudio6mNbYCOyr53QmjL94f_/edit">Google Sites</a> </li>
 
 ## 🖥️ SR1
 
@@ -36,25 +37,24 @@ Bem-vindo ao repositório do nosso projeto Plantaê. Nossa plataforma está send
     <a href="https://drive.google.com/file/d/1frHRKDRtSO41zwEVjYxHUoN2YnmuS-AE/view?usp=sharing"
       >Screencast - Azure</a>
   </li>
-</ul>
-***Deployment das histórias produzidas:***
-<ul>
+   <li>
+     <a href="pair_coding_SR1.md">Programação em Par</a>
+   </li>
   <li>
     <a href="https://plantae.azurewebsites.net/accounts/signin/?next=/"
       >Deployment na Azure</a>
   </li>
 </ul>
 
+***Histórias:***
 
-### Histórias
+<details>
+    <summary>No total fizemos 2 histórias. 👆</summary>
 
-- No total temos 12 histórias definidas e 2 implementadas. As implementadas são:
-  - Consultar o Clima Local
-  - Receber Alertas de Clima Crítico
-
-<li>
-  <a href="pair_coding_SR1.md">Programação em Par SR1</a>
-</li>
+        - Consultar o Clima Local
+        - Receber Alertas de Clima Crítico
+    
+</details>
 
 ## 🖥️ SR2
 
@@ -84,59 +84,51 @@ Bem-vindo ao repositório do nosso projeto Plantaê. Nossa plataforma está send
     <a href="https://github.com/user-attachments/assets/67d4081b-2f48-4b78-9ac8-31318d7bb308"
       >BugTracker </a>
   </li>
+    <li>
+     <a href="pair_coding_SR1.md">Programação em Par</a>
+   </li>
+    <li>
+    <a href="https://plantae.azurewebsites.net/accounts/signin/?next=/"
+      >Deployment na Azure</a>
+  </li>
 </ul>
 
-### Histórias
+***Histórias:***
+<a>
+<details>
+    <summary>No total fizemos 10 histórias. 👆</summary>
+    
+        - Criar Eventos
+        - Sugerir evento de colheita 
+        - Registrar Pragas
+        - Excluir/Editar evento 
+        - Informar Plantios que se dão bem ou não 
+        - Mostrar clima e informações do tempo 
+        - Dashboard Geral 
+        - Alertar um clima crítico na região 
+        - Sugerir como tratar as pragas 
+        - Sugerir e permitir criação de plantio recomendado com base na colheita anterior
+</details>
 
-- No total temos 10 histórias implementadas. São elas:
-    - Criar Eventos
-    - Sugerir evento de colheita 
-    - Registrar Pragas
-    - Excluir/Editar evento 
-    - Informar Plantios que se dão bem ou não 
-    - Mostrar clima e informações do tempo 
-    - Dashboard Geral 
-    - Alertar um clima crítico na região 
-    - Sugerir como tratar as pragas 
-    - Sugerir e permitir criação de plantio recomendado com base na colheita anterior
+ 
+## 🫂 Membros
 
-<li>
-  <a href="pair_coding_SR2.md">Programação em Par SR2</a>
-</li>
-
-## 👩‍💻 Membros
-
+### 👨‍💻 Desenvolvedores
 <ul>
-  <li>
-    Amanda Montarroios - amo@cesar.school 📩
-  </li>
-  <li>
-    João Micucci - jhmm@cesar.school 📩
-  </li>
-   <li>
-    Malu Dantas - mldt@cesar.school 📩
-  </li>
-  <li>
-    Mateus Ribeiro - mar2@cesar.school 📩
-  </li>
-  <li>
-    João Pedro Mamede - jpmd2@cesar.school 📩
-  </li>
-  <li>
-    Carlos Eduardo Espósito - ceec@cesar.school 📩
-  </li>
-    <li>
-    Clara Maria Paes Barreto Bandeira - cmpbb@cesar.school 📩
-  </li>
-  <li>
-    Maria Clara Vieira de Melo Borges - mcvmb@cesar.school 📩
-  </li>
-   <li>
-    Emmanoel Henrique de Arruda Melo - eham@cesar.school 📩
-  </li>
-  <li>
-    Thales Souza Lima - tsl2@cesar.school  📩
-  </li>
+  <li>Amanda Montarroios - amo@cesar.school 📩</li>
+  <li>João Micucci - jhmm@cesar.school 📩</li>
+  <li>Malu Dantas - mldt@cesar.school 📩</li>
+  <li>Mateus Ribeiro - mar2@cesar.school 📩</li>
+  <li>João Pedro Mamede - jpmd2@cesar.school 📩</li>
+  <li>Carlos Eduardo Espósito - ceec@cesar.school 📩</li>
+</ul>
+
+### 🎨 Designers
+<ul>
+  <li>Clara Maria Paes Barreto Bandeira - cmpbb@cesar.school 📩</li>
+  <li>Maria Clara Vieira de Melo Borges - mcvmb@cesar.school 📩</li>
+  <li>Emmanoel Henrique de Arruda Melo - eham@cesar.school 📩</li>
+  <li>Thales Souza Lima - tsl2@cesar.school 📩</li>
 </ul>
 
 ## Contribuição dos membros de CC
