@@ -52,54 +52,9 @@ Bem-vindo ao repositório do nosso projeto Plantaê. Nossa plataforma está send
   - Consultar o Clima Local
   - Receber Alertas de Clima Crítico
 
-**👩‍💻🧑‍💻 Relato da Programação em Par experimentada:**
-
-### Par 1: João Micucci & João Pedro Mamede
-
-Micucci e Mamede trabalharam na implementação do sistema de alertas climáticos. Eles desenvolveram uma lógica para capturar dados meteorológicos e enviar notificações aos usuários com base na localização das plantações registradas.
-
-- Micucci atuou como driver, focando na implementação do código de captura de dados da API de clima e a integração com o backend.
-  
-- Mamede desempenhou o papel de navigator, sugerindo melhorias na estrutura de código e garantindo a correta modelagem dos dados recebidos.
-  
-Dificuldades Enfrentadas:
-Houve dificuldades iniciais na integração com a API de clima, especialmente na autenticação dos tokens, mas ambos conseguiram resolver ao trabalhar juntos na análise dos logs de erro.
-
-Resultados:
-A funcionalidade de alertas climáticos foi implementada com sucesso, e já está em fase de testes para garantir a precisão das notificações.
-
-### Par 2: Mateus Ribeiro & Carlos Eduardo Espósito
-
-Tarefa Realizada:
-Mateus e Carlos focaram na criação do painel de afinidade entre plantas. A tarefa envolveu desenvolver uma interface interativa onde os usuários pudessem visualizar quais plantas são compatíveis entre si.
-
-- Mateus foi o driver, responsável por programar o front-end utilizando HTML, CSS e Bootstrap para criar um design amigável e intuitivo.
-  
-- Carlos atuou como navigator, ajudando a refinar o código, sugerindo melhores práticas e verificando se o design estava alinhado com a lógica implementada no backend.
-  
-Dificuldades Enfrentadas:
-O principal desafio foi a definição de um layout que acomodasse eficientemente a quantidade de informações das plantas sem sobrecarregar visualmente o usuário. Eles precisaram revisar algumas ideias de design.
-
-Resultados:
-Foi criado um protótipo funcional do painel de afinidade, com um design simplificado e responsivo, pronto para passar pela fase de testes com usuários.
-
-### Par 3: Malu Dantas & Amanda Montarroios
-
-Tarefa Realizada:
-Malu e Amanda se concentraram na funcionalidade de calendário de atividades para as plantações. O objetivo era permitir que os usuários organizassem e visualizassem atividades, como regar, adubar e colher, dentro de um calendário interativo.
-
-- Malu atuou como driver, lidando com a lógica de backend no Django, que envolveu a criação de modelos e controle das atividades no banco de dados.
-  
-- Amanda foi a navigator, orientando na modelagem dos dados e na verificação da compatibilidade entre o front-end e o backend, além de sugerir melhorias na performance do código.
-  
-Dificuldades Enfrentadas:
-A equipe enfrentou dificuldades na sincronização entre o calendário e as atividades registradas, especialmente na exibição dinâmica de eventos conforme o banco de dados fosse atualizado.
-
-Resultados:
-Conseguiram implementar a funcionalidade principal do calendário, com a exibição de atividades e a possibilidade de adicionar novos eventos. A sincronização ainda precisa de refinamentos, que serão abordados na próxima sessão.
-
-### Conclusão
-As sessões de pair programming proporcionaram uma oportunidade valiosa de colaboração entre os membros da equipe. Todos os pares conseguiram avançar nas tarefas e resolver problemas de forma eficiente. As funcionalidades desenvolvidas estão em fase de testes e ajustes, com boas perspectivas para conclusão.
+<li>
+  <a href="pair_coding_SR1.md">Programação em Par SR1</a>
+</li>
 
 ## 🖥️ SR2
 
@@ -145,37 +100,9 @@ As sessões de pair programming proporcionaram uma oportunidade valiosa de colab
     - Sugerir como tratar as pragas 
     - Sugerir e permitir criação de plantio recomendado com base na colheita anterior
 
-
-**👩‍💻🧑‍💻 Relato da Programação em Par no SR2**
-
----
-
-### **Introdução**  
-No SR2, diferentemente do primeiro sprint, a metodologia de programação em par não foi adotada. Isso se deveu à sobrecarga de provas e trabalhos de outras disciplinas, que impactou o tempo disponível para a organização e execução colaborativa das tarefas. 
-
-Embora não tenha sido possível manter a prática de pair programming, a equipe buscou adaptar-se, dividindo as tarefas de maneira individual para garantir o progresso do projeto dentro dos prazos estabelecidos.  
-
----
-
-### **Adaptação e Estratégia**  
-1. **Divisão Individual de Tarefas**:  
-   Cada membro assumiu responsabilidades específicas de forma independente, seguindo as prioridades estabelecidas no planejamento inicial do SR2. Essa abordagem foi escolhida para otimizar o tempo, considerando as limitações externas.  
-
-2. **Comunicação e Alinhamento**:  
-   Apesar da ausência de programação em par, a equipe realizou reuniões regulares para discutir avanços e resolver dúvidas, mantendo um nível satisfatório de colaboração.  
-
----
-
-### **Impactos da Mudança**  
-- **Positivo**: Cada integrante teve maior autonomia para organizar seu tempo e suas entregas. Isso ajudou a conciliar o projeto com outras obrigações acadêmicas.  
-- **Negativo**: A falta de programação em par reduziu as oportunidades de feedback em tempo real e colaboração ativa, o que em alguns casos poderia ter acelerado a resolução de problemas.  
-
----
-
-### **Conclusão**  
-Embora a programação em par não tenha sido utilizada neste sprint, o foco da equipe em adaptar-se às circunstâncias demonstra maturidade e comprometimento. Planejamos retomar a prática no futuro, pois reconhecemos seu valor na qualidade do código, aprendizado e integração entre os membros do grupo.  
-
-O aprendizado nesta fase foi mais sobre organização e gestão de tempo, habilidades tão essenciais quanto o desenvolvimento técnico. Seguimos confiantes para as próximas etapas! 🚀
+<li>
+  <a href="pair_coding_SR2.md">Programação em Par SR2</a>
+</li>
 
 ## 👩‍💻 Membros
 
